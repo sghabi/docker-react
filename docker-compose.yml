@@ -1,0 +1,19 @@
+version: "3"
+services:
+  react-app:
+    build:
+      context: . # working directory
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules # do not map
+      - .:/app # map folder inside the container to current folder
+  tests:
+    build:
+      context: . # working directory
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - /app/node_modules # do not map
+      - .:/app # map folder inside the container to current folder
+    command: ["npm", "run", "test"]
